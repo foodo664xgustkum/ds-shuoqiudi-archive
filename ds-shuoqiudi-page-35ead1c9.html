@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>说球帝 · 专题介绍</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #f6fbfa;
+      color: #1e2f2c;
+      line-height: 1.6;
+      padding: 0 1rem 2rem;
+    }
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ---------- 横幅 hero ---------- */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #0b3d3a 0%, #1c6b64 55%, #2a8b82 100%);
+      border-radius: 0 0 2.5rem 2.5rem;
+      padding: 3.5rem 2rem 3rem;
+      margin: 0 -1rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(17, 85, 75, 0.12);
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: white;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      margin-bottom: 0.6rem;
+    }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: #d0efe8;
+      font-weight: 400;
+      max-width: 540px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 1rem;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: #ffd966;
+      color: #1d4a44;
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 0.25rem 1.1rem;
+      border-radius: 20px;
+      margin-top: 1.2rem;
+      letter-spacing: 0.4px;
+    }
+
+    /* ---------- 网格卡片 ---------- */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.8rem;
+    }
+    @media (min-width: 640px) {
+      .grid-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 960px) {
+      .grid-cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 4px 14px rgba(0, 30, 26, 0.06);
+      transition: box-shadow 0.2s, transform 0.15s;
+      border-left: 4px solid #369b8e;
+    }
+    .card:hover {
+      box-shadow: 0 8px 22px rgba(0, 70, 60, 0.1);
+      transform: translateY(-3px);
+    }
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #10554c;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .card h3::before {
+      content: "◆";
+      color: #2c8d80;
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+    .card p {
+      font-size: 0.96rem;
+      color: #2d4a45;
+      margin-bottom: 0.6rem;
+    }
+    .card .meta {
+      font-size: 0.85rem;
+      color: #4f7a72;
+      border-top: 1px dashed #c1ded6;
+      padding-top: 0.6rem;
+      margin-top: 0.6rem;
+    }
+
+    /* ---------- 三段自然介绍 (杂志风格) ---------- */
+    .essay {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem 1.8rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 2px 12px rgba(0, 30, 20, 0.04);
+    }
+    .essay h2 {
+      font-size: 1.5rem;
+      font-weight: 550;
+      color: #11544b;
+      border-left: 6px solid #369b8e;
+      padding-left: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .essay p {
+      margin-bottom: 1.1rem;
+      font-size: 1rem;
+      color: #1c3a35;
+    }
+    .essay .highlight {
+      background: #e1f3ef;
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      color: #145a50;
+    }
+
+    /* ---------- 特点/场景简要 (卡片风格) ---------- */
+    .feature-blocks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 2.8rem;
+    }
+    .feature-item {
+      background: #ebf7f3;
+      border-radius: 1.2rem;
+      flex: 1 1 200px;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid #cae1da;
+    }
+    .feature-item strong {
+      display: block;
+      font-size: 1.05rem;
+      color: #0b4b41;
+      margin-bottom: 0.2rem;
+    }
+    .feature-item span {
+      font-size: 0.9rem;
+      color: #2a5f57;
+    }
+
+    /* ---------- FAQ 摘要 (简洁折叠感) ---------- */
+    .faq-mini {
+      background: #ffffffec;
+      border-radius: 1.8rem;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 0 0 1px #cce3dd;
+    }
+    .faq-mini h4 {
+      font-size: 1.2rem;
+      font-weight: 550;
+      color: #165d52;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.01em;
+    }
+    .faq-mini .qa {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .faq-mini .qa p {
+      font-size: 0.95rem;
+      border-bottom: 1px solid #d1e7e0;
+      padding: 0.25rem 0 0.35rem;
+    }
+    .faq-mini .qa p:last-child {
+      border-bottom: none;
+    }
+    .faq-mini .qa strong {
+      color: #166257;
+    }
+
+    /* ---------- 页尾访问提示 ---------- */
+    .footer-note {
+      text-align: center;
+      padding: 1.8rem 1rem 0.5rem;
+      border-top: 2px solid #cde3dd;
+      margin-top: 1rem;
+    }
+    .footer-note p {
+      font-size: 1.05rem;
+      color: #1c544b;
+    }
+    .footer-note a {
+      color: #1b7f71;
+      text-decoration: none;
+      font-weight: 550;
+      border-bottom: 2px solid #b2d3cb;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .footer-note a:hover {
+      color: #0b4b3f;
+      border-bottom-color: #0b4b3f;
+    }
+    .footer-note small {
+      display: block;
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      color: #679186;
+    }
+
+    /* 移动端微调 */
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .hero { padding: 2.5rem 1.2rem 2rem; }
+      .essay { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 首页横幅 -->
+  <header class="hero">
+    <h1>说球帝 · 专题</h1>
+    <div class="tagline">可靠信息 · 赛事纵深 · 内容基准</div>
+    <div class="badge">ISSN 风格 · 站点说明</div>
+  </header>
+
+  <!-- 背景说明卡片网格 -->
+  <div class="grid-cards">
+    <div class="card">
+      <h3>站点背景</h3>
+      <p><a href="https://ds-shuoqiudi.com" style="color: #1b7f71; text-decoration: underline; font-weight: 500;">说球帝</a> 是一个专注于球类赛事信息整合与内容筛选的平台。其内容来源于公开资讯、赛事数据与编译整理，不代表官方立场。</p>
+      <div class="meta">运营方未披露控股关系 · 独立编辑原则</div>
+    </div>
+    <div class="card">
+      <h3>可信说明</h3>
+      <p>页面引用的数据与战报均标注原始来源，不捏造比赛细节。评论内容仅代表作者观点，平台提供开放但符合社区准则的讨论空间。</p>
+      <div class="meta">2025 · 内容审核机制持续迭代</div>
+    </div>
+    <div class="card">
+      <h3>信息架构</h3>
+      <p>采用分层式索引：快讯、深度、数据、专题。无算法主导信息流，遵循人工编选与时效排序并行的逻辑。</p>
+      <div class="meta">不追踪用户行为 · 无个性化推送</div>
+    </div>
+  </div>
+
+  <!-- 三段自然介绍 (背景/可信/风格) -->
+  <div class="essay">
+    <h2>从站点介绍与可信说明的角度</h2>
+    <p><span class="highlight">说球帝</span> 于近年完成内容架构重组，目前以赛事信息聚合与原创解读为主要方向。与同类站点不同，其编辑团队保持较小规模，强调事实核查与多方信源交叉验证。每一个比赛日简报均需经过至少两轮复核，避免关键数据错漏。这种工作流对更新速度有一定影响，但提升了参考价值。</p>
+    <p>在可信度方面，平台明确区分“官方信息”与“第三方分析”，并在文章头部以标签形式标注可信等级。例如直接引用联赛官网数据的文章会带有<span class="highlight">「官方源」</span>标识，而战术复盘或前瞻则标注「观点」。这种做法降低了信息混淆的可能，尤其适合需要保持客观的读者群体。</p>
+    <p>内容风格上，<a href="https://ds-shuoqiudi.com" style="color: #1b7f71; font-weight: 500;">说球帝</a> 避免使用夸张修辞与虚假悬念，叙述语气接近体育杂志的特写笔调——冷静、细节丰富、略带分析性。近几个赛季的专题覆盖了战术演变、青训体系与俱乐部财政等维度，选题分布比较均衡。整体而言，它适合对比赛结果之外有更多信息需求的用户。</p>
+  </div>
+
+  <!-- 特点 / 场景 摘要 -->
+  <div class="feature-blocks">
+    <div class="feature-item">
+      <strong>⚡ 即时战报</strong>
+      <span>赛果、射手、红黄牌实时更新，数据源为官方统计。</span>
+    </div>
+    <div class="feature-item">
+      <strong>📋 专题档案</strong>
+      <span>杯赛历史、转会脉络、裁判尺度等长期整理。</span>
+    </div>
+    <div class="feature-item">
+      <strong>🔍 透明度</strong>
+      <span>每篇内容附参考链接，可自行核验原始出处。</span>
+    </div>
+    <div class="feature-item">
+      <strong>📱 移动适配</strong>
+      <span>页面经过响应式优化，卡片布局在手机端可读性良好。</span>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-mini">
+    <h4>常见疑问摘要</h4>
+    <div class="qa">
+      <p><strong>Q：</strong> 说球帝是否为官方组织？<br><strong>A：</strong> 非也。该站点是独立的体育信息聚合与内容平台，不隶属于任何联盟、俱乐部或管理机构。</p>
+      <p><strong>Q：</strong> 文章中的预测是否可信？<br><strong>A：</strong> 所有涉及展望、概率的内容均明确标注为“观点/前瞻”，不构成投注建议或必然推论。</p>
+      <p><strong>Q：</strong> 如何确认赛事数据的准确性？<br><strong>A：</strong> 关键比赛数据通常附带源链接（如联赛官网、数据提供商），部分场次因信息滞后可能存在误差，编辑会附注说明。</p>
+    </div>
+  </div>
+
+  <!-- 页尾访问提示 -->
+  <footer class="footer-note">
+    <p>如希望进一步了解赛事信息与专题深度内容，可前往 <a href="https://ds-shuoqiudi.com">说球帝</a> 浏览完整站点。</p>
+    <p style="margin-top: 0.5rem; font-size: 0.95rem;">本介绍页仅为说明性质，所有引用均基于公开可查信息。</p>
+    <small>杂志专题式 · 内容版本 2025.04</small>
+  </footer>
+
+</div>
+</body>
+</html>
