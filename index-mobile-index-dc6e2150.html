@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>竞彩网 · 再次发现</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f4f9fc;
+            color: #1d2b3a;
+            line-height: 1.65;
+            padding: 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 680px;
+            width: 100%;
+        }
+
+        /* 主视觉卡片 — 蓝绿渐变 */
+        .hero-card {
+            background: linear-gradient(145deg, #0f4c5c 0%, #1a6b7a 100%);
+            border-radius: 28px;
+            padding: 2.4rem 1.8rem 2rem;
+            color: white;
+            box-shadow: 0 12px 28px rgba(17, 92, 105, 0.20);
+            margin-bottom: 1.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: -30px;
+            width: 160px;
+            height: 160px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+
+        .hero-card h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero-card .sub {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            border-left: 3px solid #a1e3e0;
+            padding-left: 1rem;
+        }
+
+        .hero-card .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1rem;
+            margin-top: 1.8rem;
+        }
+
+        .hero-card .badge {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(2px);
+            padding: 0.3rem 1rem 0.4rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #d5f0ef;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* 网格卡片 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.6rem 0 1.4rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.4rem 1rem 1.2rem;
+            box-shadow: 0 4px 14px rgba(24, 88, 98, 0.06);
+            border: 1px solid rgba(60, 160, 150, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(18, 85, 90, 0.08);
+        }
+
+        .card .icon-em {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #115b68;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #2a404e;
+        }
+
+        /* 人群卡片整行 */
+        .audience-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem 1.4rem;
+            margin: 1.2rem 0 1.6rem;
+            box-shadow: 0 4px 14px rgba(24, 88, 98, 0.06);
+            border-left: 5px solid #249e92;
+        }
+
+        .audience-card h2 {
+            font-size: 1.2rem;
+            color: #11535f;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .audience-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem 1rem;
+        }
+
+        .audience-tags span {
+            background: #e6f3f0;
+            color: #1d5a63;
+            padding: 0.2rem 1rem 0.35rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: #f0f8fa;
+            border-radius: 20px;
+            padding: 1.4rem 1.5rem;
+            margin: 1.6rem 0 1.2rem;
+            border: 1px solid #c3e2dd;
+        }
+
+        .link-paragraph p {
+            font-size: 0.96rem;
+            color: #1c3b44;
+        }
+
+        .link-paragraph a {
+            color: #0d6b63;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #8ed1c9;
+            transition: border-color 0.15s;
+        }
+
+        .link-paragraph a:hover {
+            border-bottom-color: #0a5b54;
+        }
+
+        /* FAQ 精简摘要 */
+        .faq-mini {
+            background: white;
+            border-radius: 20px;
+            padding: 1.3rem 1.4rem;
+            margin: 1.2rem 0 1.8rem;
+            box-shadow: 0 4px 14px rgba(24, 88, 98, 0.04);
+        }
+
+        .faq-mini details {
+            border-bottom: 1px solid #e0edec;
+            padding: 0.5rem 0;
+        }
+
+        .faq-mini details:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-mini summary {
+            font-weight: 600;
+            color: #1c5d66;
+            cursor: pointer;
+            font-size: 0.98rem;
+            padding: 0.2rem 0;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            color: #249e92;
+        }
+
+        .faq-mini details p {
+            margin: 0.4rem 0 0.2rem;
+            font-size: 0.9rem;
+            color: #2e4b55;
+            padding-left: 0.5rem;
+        }
+
+        /* 脚注 */
+        .footer-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6a8d92;
+            margin: 2rem 0 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #d4e5e2;
+        }
+
+        /* 适配小屏 */
+        @media (max-width: 460px) {
+            .hero-card h1 {
+                font-size: 1.8rem;
+            }
+            .grid-cards {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+            .card {
+                padding: 1.2rem 1rem;
+            }
+            .hero-card {
+                padding: 1.6rem 1.2rem;
+            }
+            .audience-card {
+                padding: 1.2rem 1rem;
+            }
+        }
+
+        @media (min-width: 700px) {
+            body {
+                padding: 2rem 1.5rem;
+            }
+            .hero-card {
+                padding: 3rem 2.2rem 2.4rem;
+            }
+            .grid-cards {
+                gap: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero 主视觉 -->
+        <div class="hero-card">
+            <h1>竞彩网</h1>
+            <div class="sub">信息聚合 · 常看常新</div>
+            <div class="badge-grid">
+                <span class="badge">📌 再次访问</span>
+                <span class="badge">⭐ 收藏</span>
+                <span class="badge">🔄 持续关注</span>
+                <span class="badge">📱 移动适配</span>
+            </div>
+        </div>
+
+        <!-- 用途卡片网格 -->
+        <div class="grid-cards">
+            <div class="card">
+                <span class="icon-em">📋</span>
+                <h3>赛事动态</h3>
+                <p>从赛程更新到即时数据，保持对焦点场次的跟进，信息结构清晰。</p>
+            </div>
+            <div class="card">
+                <span class="icon-em">🔍</span>
+                <h3>快速回溯</h3>
+                <p>再次打开时直接定位到之前关注的联赛或球队，减少重复搜索。</p>
+            </div>
+            <div class="card">
+                <span class="icon-em">📎</span>
+                <h3>收藏锚点</h3>
+                <p>把常用版块或特定赛事页加入浏览器收藏夹，下次访问一步直达。</p>
+            </div>
+            <div class="card">
+                <span class="icon-em">🔄</span>
+                <h3>持续追踪</h3>
+                <p>对于长期关注的赛事或数据趋势，定期回访能获得更连贯的参考。</p>
+            </div>
+        </div>
+
+        <!-- 适合人群卡片（全宽） -->
+        <div class="audience-card">
+            <h2>🧑‍🤝‍🧑 适合这样的人群</h2>
+            <div class="audience-tags">
+                <span>赛事爱好者</span>
+                <span>数据参考者</span>
+                <span>信息收藏家</span>
+                <span>移动端用户</span>
+                <span>日常浏览者</span>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.92rem; color: #2a4d54;">
+                无论你是习惯在通勤时快速浏览赛程，还是希望把某个页面固定为常用标签，<strong>竞彩网</strong> 的移动端结构都适合反复访问和标记。
+            </p>
+        </div>
+
+        <!-- 自然链接段落（包含 a 标签） -->
+        <div class="link-paragraph">
+            <p>
+                如果你之前访问过 <a href="https://index-mobile-sporttery.com">竞彩网</a>，可能会发现它的板块布局和筛选逻辑更适合手机屏幕。把页面加入浏览器书签或主屏幕后，再次回来时能直接延续上一次的阅读节奏，减少重新适应的成本。对于习惯固定信息源的人来说，<a href="https://index-mobile-sporttery.com">竞彩网</a> 的持续迭代也让长期跟踪变得更加顺手。
+            </p>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-mini">
+            <details>
+                <summary>为什么建议再次访问？</summary>
+                <p>赛程和数据会动态更新，隔一段时间回来查看，能获取到最新的对阵变化及统计信息，避免依赖过时快照。</p>
+            </details>
+            <details>
+                <summary>收藏后能保留哪些内容？</summary>
+                <p>将页面加入浏览器收藏夹或移动端主屏幕，可快速打开当前版本；网站内部视图的跳转逻辑也保持统一。</p>
+            </details>
+            <details>
+                <summary>持续关注有什么好处？</summary>
+                <p>对于周期性的赛事或联赛，长期关注能形成更连贯的信息脉络，方便对比前后轮次的数据波动。</p>
+            </details>
+        </div>
+
+        <!-- 简单提示 -->
+        <div style="background:#dceeea; border-radius: 30px; padding: 0.8rem 1.2rem; font-size:0.9rem; color:#11525c; margin: 0.2rem 0 0.8rem;">
+            💡 提示：在浏览器中为此页面添加书签，或使用移动端「添加到主屏幕」功能，方便以后快速返回。
+        </div>
+
+        <!-- footer -->
+        <div class="footer-note">
+            信息聚合 · 持续关注 · 适合反复查阅
+        </div>
+    </div>
+</body>
+</html>
