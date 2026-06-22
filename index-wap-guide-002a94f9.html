@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞彩网 · 知识库入口页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f1f3f6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            color: #2c3e50;
+            line-height: 1.65;
+            padding: 2rem 1.25rem;
+        }
+
+        .page-wrapper {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* 顶部标识 */
+        .site-badge {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 2.2rem;
+        }
+
+        .site-badge .marker {
+            display: inline-block;
+            width: 6px;
+            height: 24px;
+            background: #b71c1c;
+            border-radius: 3px;
+        }
+
+        .site-badge .label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #4a5568;
+            background: #e8ecf1;
+            padding: 0.2rem 1rem;
+            border-radius: 16px;
+        }
+
+        /* hero 区块（目录式引言） */
+        .hero-directory {
+            background: #ffffff;
+            border: 1px solid #dce1e8;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.02);
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-directory h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #1e2a3a;
+            position: relative;
+            padding-bottom: 0.2rem;
+        }
+
+        .hero-directory h1::after {
+            content: '';
+            display: block;
+            width: 44px;
+            height: 4px;
+            background: #b71c1c;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+
+        .hero-directory .sub-desc {
+            max-width: 480px;
+            color: #4b5a6a;
+            font-size: 1.05rem;
+            background: #f5f7fa;
+            padding: 0.9rem 1.5rem;
+            border-radius: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .hero-directory .sub-desc a {
+            color: #b71c1c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1.5px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .hero-directory .sub-desc a:hover {
+            color: #7f1010;
+        }
+
+        /* 卡片网格 —— 目录式布局 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #dce1e8;
+            border-radius: 18px;
+            padding: 1.6rem 1.5rem 1.8rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: #b0bccb;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+        }
+
+        .card .icon-symbol {
+            font-size: 1.7rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            color: #b71c1c;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #1a2634;
+            letter-spacing: 0.01em;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #4b5a6a;
+            margin-bottom: 0.7rem;
+        }
+
+        .card .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 0.6rem;
+        }
+
+        .card .tag {
+            background: #eef1f5;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            color: #3a4a5c;
+            border: 1px solid #dbe0e7;
+        }
+
+        /* 说明区 + 提示区 组合双栏 */
+        .info-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-panel .panel-card {
+            flex: 1 1 280px;
+            background: #ffffff;
+            border: 1px solid #e0e5ec;
+            border-radius: 18px;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.02);
+        }
+
+        .panel-card .mini-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1e2a3a;
+        }
+
+        .panel-card .mini-title .badge-line {
+            width: 28px;
+            height: 3px;
+            background: #b71c1c;
+            border-radius: 3px;
+        }
+
+        .panel-card ul, .panel-card ol {
+            padding-left: 1.2rem;
+            font-size: 0.95rem;
+            color: #3f4d5e;
+        }
+
+        .panel-card li {
+            margin-bottom: 0.4rem;
+        }
+
+        .panel-card .notice-strong {
+            background: #fcf8e8;
+            border-left: 4px solid #b71c1c;
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #3f3f3f;
+            margin-top: 1rem;
+        }
+
+        /* 相关信息区 —— 精简FAQ摘要 */
+        .rel-section {
+            background: #ffffff;
+            border: 1px solid #e0e5ec;
+            border-radius: 18px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+            margin-bottom: 2rem;
+        }
+
+        .rel-section h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #1e2a3a;
+        }
+
+        .rel-section h2 span {
+            background: #b71c1c;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            margin-left: 0.3rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eaeef3;
+            padding: 0.9rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #1f2b39;
+            font-size: 0.98rem;
+        }
+
+        .faq-a {
+            margin-top: 0.25rem;
+            color: #4f6072;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .faq-a a {
+            color: #b71c1c;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        /* 底部脚注 */
+        .footer-note {
+            margin-top: 2.5rem;
+            text-align: center;
+            color: #68788c;
+            font-size: 0.85rem;
+            border-top: 1px solid #dde2ea;
+            padding-top: 1.8rem;
+        }
+
+        .footer-note a {
+            color: #b71c1c;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+
+            .hero-directory {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1.8rem 1.2rem;
+            }
+
+            .hero-directory h1 {
+                font-size: 1.7rem;
+            }
+
+            .hero-directory .sub-desc {
+                max-width: 100%;
+                font-size: 0.95rem;
+                padding: 0.7rem 1rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-panel {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- 标识 -->
+    <div class="site-badge">
+        <span class="marker"></span>
+        <span class="label">知识库 · 入口导航</span>
+    </div>
+
+    <!-- hero 目录式引言 -->
+    <div class="hero-directory">
+        <h1>竞彩知识库</h1>
+        <div class="sub-desc">
+            稳定入口 · 信息聚合 —— 
+            <a href="https://index-wap-sporttery.com">竞彩网</a> 
+            提供赛事数据及资讯索引
+        </div>
+    </div>
+
+    <!-- 卡片网格：目录感布局 -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="icon-symbol">📌</div>
+            <h3>赛事目录</h3>
+            <p>按联赛、日期、盘口类型快速定位比赛，目录结构清晰，便于日常浏览。</p>
+            <div class="tag-list">
+                <span class="tag">足球</span>
+                <span class="tag">篮球</span>
+                <span class="tag">即时比分</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="icon-symbol">📋</div>
+            <h3>数据说明区</h3>
+            <p>包含赔率变动、历史交锋、近期战绩等说明卡片，每一项都附有简要释义。</p>
+            <div class="tag-list">
+                <span class="tag">赔率类型</span>
+                <span class="tag">让球</span>
+                <span class="tag">胜平负</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="icon-symbol">⚙️</div>
+            <h3>提示与用法</h3>
+            <p>页面功能提示、筛选器使用说明、数据更新频率说明，降低学习成本。</p>
+            <div class="tag-list">
+                <span class="tag">筛选</span>
+                <span class="tag">排序</span>
+                <span class="tag">收藏</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="icon-symbol">📎</div>
+            <h3>相关信息</h3>
+            <p>常见问题摘要、版本更新记录、外部资源链接，方便进一步查阅。</p>
+            <div class="tag-list">
+                <span class="tag">FAQ</span>
+                <span class="tag">更新日志</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 说明区 + 提示区 -->
+    <div class="info-panel">
+        <div class="panel-card">
+            <div class="mini-title">
+                <span class="badge-line"></span> 页面说明
+            </div>
+            <ul>
+                <li>本页汇集了主流赛事的结构化目录，每项数据均标注来源与更新时段。</li>
+                <li>卡片式分区让信息层级更直观，适合快速浏览与对比。</li>
+                <li>所有说明内容均保持中立，不包含预测或建议。</li>
+            </ul>
+            <div class="notice-strong">
+                💡 提示：若需查阅完整赛事列表，可直接访问 
+                <a href="https://index-wap-sporttery.com">竞彩网</a> 
+                获取实时数据。
+            </div>
+        </div>
+
+        <div class="panel-card">
+            <div class="mini-title">
+                <span class="badge-line"></span> 使用提示
+            </div>
+            <ol>
+                <li>利用顶部筛选器可按联赛或日期缩小范围。</li>
+                <li>点击比赛卡片可展开该场次的详细数据面板。</li>
+                <li>页面数据通常每 30 秒自动刷新一次，高峰期间可能略有延迟。</li>
+                <li>如需收藏特定比赛，可使用页面内的星标功能（需登录）。</li>
+            </ol>
+            <div class="notice-strong">
+                ⏱️ 数据延迟说明：所有赔率与比分仅供参考，以现场实际情况为准。
+            </div>
+        </div>
+    </div>
+
+    <!-- 相关信息区（FAQ 摘要） -->
+    <div class="rel-section">
+        <h2>📖 相关信息 <span>FAQ 摘要</span></h2>
+
+        <div class="faq-item">
+            <div class="faq-q">Q：数据更新频率是怎样的？</div>
+            <div class="faq-a">A：核心比赛数据（比分、状态）每 20~30 秒同步一次；赔率变动视供应商推送而定，通常不超过 2 分钟。更准确的信息请以 
+                <a href="https://index-wap-sporttery.com">竞彩网</a> 实时页面为准。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">Q：为什么有些比赛没有显示让球数？</div>
+            <div class="faq-a">A：让球数值仅当该场比赛开出相应盘口时才会展示。若页面显示“—”，表示当前未提供该玩法数据。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">Q：页面上的“目录”和“说明区”有什么作用？</div>
+            <div class="faq-a">A：目录区帮助您快速定位想要关注的联赛或比赛类型；说明区对常见术语、筛选逻辑做了简要解释，方便新用户理解页面结构。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">Q：是否提供历史数据查询？</div>
+            <div class="faq-a">A：当前页面主要展示当日及未来几天的赛事。历史对阵与往期赔率可前往 
+                <a href="https://index-wap-sporttery.com">竞彩网</a> 
+                的“历史数据”板块检索（部分功能需登录）。</div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-note">
+        <p>内容整理自开放数据接口，仅供页面展示与信息参考。<br>
+        完整赛事数据请以 <a href="https://index-wap-sporttery.com">竞彩网</a> 实际页面为准。</p>
+        <p style="margin-top: 0.6rem; color: #8a9aa8;">—— 知识库入口 · 目录说明页 ——</p>
+    </div>
+
+</div>
+</body>
+</html>
